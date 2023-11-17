@@ -16,18 +16,28 @@ public class  LeapYearChecker extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String input = tfYear.getText();
+                int year = 0;
 
-                if (input.equals(null)){
-                    JOptionPane.showMessageDialog(null, "No year inputted");
+                try {
+                    year = parseInt(tfYear.getText());
+
+                    if (year < 0 || year == 0){
+                        throw new NumberFormatException();
+                    }
+                } catch (NumberFormatException m){
+                    input = JOptionPane.showInputDialog("Please input a valid year");
+                    tfYear.setText(input);
                     return;
                 }
 
-                int year = parseInt(tfYear.getText());
                 if ((year % 4 == 0 && year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)){
                     JOptionPane.showMessageDialog(null,"Leap year");
                 } else {
                     JOptionPane.showMessageDialog(null, "Not a leap year");
                 }
+
+                tfYear.setText("");
+
             }
         });
     }

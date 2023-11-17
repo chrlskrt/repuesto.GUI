@@ -18,8 +18,22 @@ public class SimpleCalc extends JFrame {
         btnCompute.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int num1 = parseInt(tfNumber1.getText());
-                int num2 = parseInt(tfNumber2.getText());
+                int num1, num2;
+
+                try {
+                    num1 = parseInt(tfNumber1.getText());
+                }catch(NumberFormatException num){
+                    tfNumber1.setText(JOptionPane.showInputDialog("Please input a valid number for Number 1:"));
+                    return;
+                }
+
+                try {
+                    num2 = parseInt(tfNumber2.getText());
+                } catch(NumberFormatException num){
+                    tfNumber2.setText(JOptionPane.showInputDialog("Please input a valid number for Number 2:"));
+                    return;
+                }
+
                 String op = (String) cbOperations.getSelectedItem();
                 int result = 0;
 
